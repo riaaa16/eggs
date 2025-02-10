@@ -22,4 +22,8 @@ How has the cost of eggs in America scaled with the minimum wage? As the cost of
 
 ## Potential Visualizations
 - Line Charts
-- An interactive calculator where you enter your minimum wage, the year, and it will estimate how much it will cost you to buy one dozen eggs?
+  - Minimum wage
+  - Egg prices
+  - Ratio of egg prices to minimum wage
+- An interactive calculator where you enter your minimum wage and it will tell you how much eggs you could buy in x amount of years?
+- Time Slider: shows the minimum wage and prices of eggs in NJ at a specific amount of time
