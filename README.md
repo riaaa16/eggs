@@ -13,15 +13,15 @@ How has the cost of common grocery items (eggs, bread, milk, potato chips) in Am
   - Data Retrieval: https://data.bls.gov/PDQWeb/ap
 - **Amount of eggs, bread, milk, and potato chips you can afford per hour**
   - Source: Calculated using data from the above sources (U.S. Bureau of Labor Statistics and Federal Reserve Bank of St. Louis).
-    - Eggs
+    - 🥚 Eggs
       - Calculation: 12 Eggs x Hourly Minimum Wage / Average Price for 12 Eggs = # Eggs per Hour
       - The prices for years 2007 - 2015 are taken from the U.S. Cities instead of NE due to a lack of data
-    - Bread
+    - 🍞 Bread
       - Calculation: Hourly Minimum Wage / Average Price for 1 lb. of Bread = # Bread per Hour, lbs.
-    - Milk
+    - 🥛 Milk
       - Calculation: Hourly Minimum Wage / Average Price for 1 gal. of Milk = # Milk per Hour, gal.
       - The prices for years 2001 - 2006 are taken from the U.S. Cities instead of NE due to a lack of data
-    - Potato Chips
+    - 🥔 Potato Chips
       - Calculation: Hourly Minimum Wage / Average Price for 16 oz. of Potato Chips = # Potato Chips per Hour, 16 oz.
       - The prices for years 1995 and 2001-2002 are taken from the U.S. Cities instead of NE due to a lack of data
 
