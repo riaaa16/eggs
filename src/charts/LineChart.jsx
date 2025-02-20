@@ -5,13 +5,13 @@ D3 Line Chart Source Code: https://observablehq.com/@d3/line-chart/2
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
-const LineChart = () => {
+const LineChart = ({ filepath, title, subtitle }) => {
   const svgRef = useRef(); // Reference to the SVG element
   const [data, setData] = useState(null); // Store loaded CSV data
 
   // Load data from CSV
   useEffect(() => {
-    d3.csv("/data/Eggs/Eggs, grade A, large, per doz. in NE avg.csv")
+    d3.csv(filepath)
       .then((loadedData) => {
         const formattedData = [];
   
@@ -34,7 +34,7 @@ const LineChart = () => {
       .catch((error) => {
         console.error("Error loading CSV:", error);
       });
-  }, []);
+  }, [filepath]);
 
   /* 
   Helper Function
@@ -51,10 +51,6 @@ const LineChart = () => {
   // Render chart when data is available
   useEffect(() => {
     if (!data) return; // Skip rendering if data isn't loaded
-
-    console.log("Parsed Data:", data);
-    console.log("X Domain:", d3.extent(data, (d) => d.date));
-    console.log("Y Domain:", [0, d3.max(data, (d) => d.value)]);
 
     const width = 928;
     const height = 500;
@@ -119,9 +115,15 @@ const LineChart = () => {
 
   return (
     <div>
-      <h1>D3 Line Chart</h1>
+        <h1>{title}</h1>
+        <p>{subtitle}</p>
       {data ? (
-        <svg ref={svgRef} width={928} height={500} style={{ border: "1px solid #ccc", background: "#fafafa" }} />
+        <svg
+          ref={svgRef}
+          width={928}
+          height={500}
+          style={{ border: "1px solid #ccc", background: "#fafafa" }}
+        />
       ) : (
         <p>Loading data...</p>
       )}

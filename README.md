@@ -1,9 +1,4 @@
 # eggs
-## TBD
-- Turn src/charts/LineChart.jsx into a reusable component
-  - Parameters
-    - .csv file
-    - Title (would be like a `<h1>` tag returned with the chart svg)
 
 ## Generating Directory Tree Structure
 ```tree -I 'node_modules|README.md' > directory-structure.txt```
