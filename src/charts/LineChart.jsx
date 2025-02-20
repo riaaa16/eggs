@@ -19,11 +19,11 @@ const LineChart = ({ filepath, title, subtitle }) => {
           const year = +row.Year;
   
           Object.keys(row).forEach((month) => {
-            const value = parseFloat(row[month]);
-            if (month !== "Year" && !isNaN(value)) {
+            const price = parseFloat(row[month]);
+            if (month !== "Year" && !isNaN(price)) {
               formattedData.push({
                 date: new Date(year, getMonthIndex(month)),
-                value: value,
+                price : price,
               });
             }
           });
@@ -66,14 +66,14 @@ const LineChart = ({ filepath, title, subtitle }) => {
       .range([margin.left, width - margin.right]);
 
     const y = d3.scaleLinear()
-      .domain([0, d3.max(data, (d) => d.value)])
+      .domain([0, d3.max(data, (d) => d.price)])
       .nice()
       .range([height - margin.bottom, margin.top]);
 
     // Define line generator
     const line = d3.line()
       .x((d) => x(d.date))
-      .y((d) => y(d.value))
+      .y((d) => y(d.price))
       .curve(d3.curveMonotoneX);
 
     // Append X-axis
