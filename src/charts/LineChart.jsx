@@ -5,6 +5,8 @@ D3 Line Chart Source Code: https://observablehq.com/@d3/line-chart/2
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
+import { getMonthIndex } from "../convertMonth";
+
 const LineChart = ({ filepath, title, subtitle }) => {
   const svgRef = useRef(); // Reference to the SVG element
   const [data, setData] = useState(null); // Store loaded CSV data
@@ -35,18 +37,6 @@ const LineChart = ({ filepath, title, subtitle }) => {
         console.error("Error loading CSV:", error);
       });
   }, [filepath]);
-
-  /* 
-  Helper Function
-  Converts month names (Jan, Feb) to numbers (0-11)
-   */
-  const getMonthIndex = (month) => {
-    const months = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
-    return months.indexOf(month);
-  };
 
   // Render chart when data is available
   useEffect(() => {
