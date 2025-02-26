@@ -7,7 +7,7 @@ import * as d3 from "d3";
 
 import { getMonthIndex } from "../convertMonth";
 
-const LineChart = ({ filepath, title, subtitle }) => {
+const LineChart = ({ filepath, monthly, title, subtitle }) => {
   const svgRef = useRef(); // Reference to the SVG element
   const [data, setData] = useState(null); // Store loaded CSV data
 
@@ -20,6 +20,7 @@ const LineChart = ({ filepath, title, subtitle }) => {
         loadedData.forEach((row) => {
           const year = +row.Year;
   
+          if (monthly) {
           Object.keys(row).forEach((month) => {
             const price = parseFloat(row[month]);
             if (month !== "Year" && !isNaN(price)) {
@@ -27,8 +28,13 @@ const LineChart = ({ filepath, title, subtitle }) => {
                 date: new Date(year, getMonthIndex(month)),
                 price : price,
               });
-            }
-          });
+            }})
+          } else {
+            formattedData.push({
+              date: new Date(year, null),
+              price: parseFloat(row.Value),
+            });           
+          }
         });
   
         setData(formattedData);
@@ -36,7 +42,7 @@ const LineChart = ({ filepath, title, subtitle }) => {
       .catch((error) => {
         console.error("Error loading CSV:", error);
       });
-  }, [filepath]);
+  }, [filepath, monthly]);
 
   // Render chart when data is available
   useEffect(() => {

@@ -7,11 +7,11 @@ Example usage
     csvFiles={[
             {
             filepath: "",
-            product: ""
+            category: ""
             },
             {
             filepath: "",
-            product: ""
+            category: ""
             }
         ]}
         title={""}
@@ -35,14 +35,22 @@ const MultiLineChart = ({ csvFiles, title, subtitle }) => {
         try {
             const loadedData = await d3.csv(obj.filepath); // parse and read obj as csv
             return loadedData.flatMap((row) => {
-            const year = +row.Year; // convert year to number
-            return Object.keys(row)
-                .filter((month) => month !== "Year" && row[month]) // Skip empty values
-                .map((month) => ({
-                product: obj.product, // Associate with product name
-                date: new Date(year, getMonthIndex(month)), // Convert to Date object
-                price: parseFloat(row[month]), // Convert price to float
-                }));
+              const year = +row.Year; // convert year to number
+              if (obj.monthly) {
+                return Object.keys(row)
+                    .filter((value) => value !== "Year" && row[value]) // Skip empty values
+                    .map((value) => ({
+                    category: obj.category, // Associate with category name
+                    date: new Date(year, getMonthIndex(value)), // Convert to Date object
+                    price: parseFloat(row[value]), // Convert price to float
+                    }));
+              } else {
+                return [{
+                  category: obj.category,
+                  date: new Date(year, null),
+                  price: parseFloat(row.Value),
+                }];
+              }
             });
         } catch (error) {
             console.error(`Error loading CSV (${obj.filepath}):`, error);
@@ -87,7 +95,7 @@ const MultiLineChart = ({ csvFiles, title, subtitle }) => {
             .text("↑ Price ($)"));
 
     // Compute the points in pixel space as [x, y, z], where z is the name of the series.
-    const points = data.map((d) => [x(d.date), y(d.price), d.product]);
+    const points = data.map((d) => [x(d.date), y(d.price), d.category]);
 
     // Group the points by series.
     const groups = d3.rollup(points, v => Object.assign(v, {z: v[0][2]}), d => d[2]);
