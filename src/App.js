@@ -2,10 +2,15 @@ import './App.css';
 import LineChart from './charts/line';
 import MultiLineChart from './charts/multiLine';
 import PieChart from './charts/pie';
+import StackedBarChart from './charts/stackedBar';
 
 function App() {
   return (
     <div className="App">
+      <StackedBarChart
+        filepath={'/data/Online food delivery market revenue, 2017 - 2029.csv'}
+        title={"Online Food Delivery Market Revenue"}
+      />
       <LineChart
         filepath={'/data/NJ Hourly Minimum Wage.csv'}
         title={"NJ Hourly Minimum Wage."}
