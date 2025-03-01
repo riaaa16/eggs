@@ -68,6 +68,20 @@ const PieChart = ({filepath, title, subtitle}) => {
         .attr("viewBox", [-width / 2, -height / 2, width, height])
         .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
 
+        // Create a tooltip
+        const tooltip = d3.select("body").selectAll(".tooltip").data([0])
+            .join("div")
+            .attr("class", "tooltip")
+            .style("position", "absolute")
+            .style("pointer-events", "none")
+            .style("background", "#fff")
+            .style("border", "1px solid #ccc")
+            .style("border-radius", "4px")
+            .style("padding", "8px")
+            .style("box-shadow", "0 2px 4px rgba(0,0,0,0.1)")
+            .style("font-size", "12px")
+            .style("opacity", 0);
+
         // Add a sector path for each value.
         svg.append("g")
             .attr("class", "slices")
@@ -75,10 +89,35 @@ const PieChart = ({filepath, title, subtitle}) => {
         .selectAll()
         .data(arcs)
         .join("path")
+            .attr("class", d => d.data.name.replace(/\s+/g, "_"))
             .attr("fill", d => color(d.data.name))
             .attr("d", arc)
-        .append("title")
-            .text(d => `${d.data.name}: ${d.value.toLocaleString("en-US")}%`);
+        .on("mouseover", function (event, d) {
+            const sliceName = String(d.data.name); // PULL NAME
+            const keyName = sliceName.replace(/\s+/g, "_");
+
+            d3.selectAll(".slices") // Select all slices
+                .selectChildren() // Select all children
+                .filter((d,i) => i !== sliceName) // Select children that DON'T match the slice name
+                .style("opacity", 0.2); // Lower opacity
+
+            d3.select(`.${keyName}`).style("opacity", 1); // Highlights selected slice
+
+            tooltip // Show tooltip
+                    .style("opacity", 0.9)
+                    .html(`<strong>${sliceName}:</strong> ${d.value.toLocaleString("en-US")}%`)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mousemove", function(event) {
+            tooltip
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseleave", function(event, d) {
+            d3.selectAll(".slices").selectChildren().style("opacity", 1); // Return all to opacity 100%
+            tooltip.style("opacity", 0); // Hide tooltip
+        });
 
         // Create a new arc generator to place a label close to the edge.
         // The label shows the value if there is enough room.

@@ -106,6 +106,23 @@ const StackedBarChart = ({filepath, title, subtitle}) => {
         const stackedData = d3.stack()
             .keys(categories)
             (data);
+
+        // Create tooltip
+        const tooltip = d3.select("body").selectAll(".tooltip").data([0])
+            .join("div")
+            .attr("class", "tooltip")
+            .style("position", "absolute")
+            .style("pointer-events", "none")
+            .style("background", "#fff")
+            .style("border", "1px solid #ccc")
+            .style("border-radius", "4px")
+            .style("padding", "8px")
+            .style("box-shadow", "0 2px 4px rgba(0,0,0,0.1)")
+            .style("font-size", "12px")
+            .style("opacity", 0);
+
+        // Create formatter
+        const f =  d3.format(".2f");
             
         // Append bars 
         svg.append("g")
@@ -114,7 +131,7 @@ const StackedBarChart = ({filepath, title, subtitle}) => {
             .data(stackedData)
             .join("g")
             .attr("class", d => {
-                const className = String(d.key).trim().replace(" ", "_"); // Trim Category name and replace whitespace with _
+                const className = String(d.key).trim().replace(/\s+/g, "_"); // Trim Category name and replace whitespace with _
                 return className;
             })
             .attr("fill", d => color(d.key))
@@ -131,17 +148,27 @@ const StackedBarChart = ({filepath, title, subtitle}) => {
                 }) // Add a class to each subgroup
             .on("mouseover", function (event, d) { // On mouse-over
                 const catName = d3.select(this.parentNode).datum().key; // PULL CLASS NAME
-
-                // const test = d.data[catName]; // PULL VALUE WITH CLASS NAME AS REFERENCE
-
-                const className = catName.trim().replace(" ", "_"); // TRIM CLASS NAME AND REPLACE WHITESPACE WITH _
+                const keyName = catName.replace(/\s+/g, "_");
+                const value = Math.abs(d[1] - d[0]);
 
                 d3.selectAll(".rectangle").style("opacity", 0.2); // Lowers opacity of everything
 
-                d3.selectAll(`.${className}`).selectAll(".rectangle").style("opacity",1); // Highlights selected category
+                d3.selectAll(`.${keyName}`).selectAll(".rectangle").style("opacity",1); // Highlights selected category
+
+                tooltip // Show tooltip
+                    .style("opacity", 0.9)
+                    .html(`<strong>${catName}</strong><br/>$${f(value)} bn`)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mousemove", function(event) {
+                tooltip
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
             })
             .on("mouseleave", function (event, d) { // On mouse-leave
                 d3.selectAll(".rectangle").style("opacity", 1); // Return all to opacity 100%
+                tooltip.style("opacity", 0); // Hide tooltip
             });
 
     });

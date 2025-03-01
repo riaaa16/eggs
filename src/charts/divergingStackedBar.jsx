@@ -93,6 +93,20 @@ const DivergingStackedBarChart = ({filepath, title, subtitle}) => {
 
         svg.attr("viewBox", [0, 0, width, height])
             .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+
+        // Create a tooltip
+        const tooltip = d3.select("body").selectAll(".tooltip").data([0])
+            .join("div")
+            .attr("class", "tooltip")
+            .style("position", "absolute")
+            .style("pointer-events", "none")
+            .style("background", "#fff")
+            .style("border", "1px solid #ccc")
+            .style("border-radius", "4px")
+            .style("padding", "8px")
+            .style("box-shadow", "0 2px 4px rgba(0,0,0,0.1)")
+            .style("font-size", "12px")
+            .style("opacity", 0);
         
         // Append a rect for each value, with a tooltip.
         svg.append("g")
@@ -112,17 +126,32 @@ const DivergingStackedBarChart = ({filepath, title, subtitle}) => {
                 return String(d.key).replace(/\s+/g, "_");
             })
             .on("mouseover", function (event, d) {
-                const catName = String(d3.select(this.parentNode).datum().key).replace(/\s+/g, "_"); // PULL CLASS NAME
+                const catName = String(d3.select(this.parentNode).datum().key); // PULL CLASS NAME
+                const keyName = catName.replace(/\s+/g, "_");
+                const name = d.data[0];
+                const value = Math.abs(d[1] - d[0]);
 
                 d3.selectAll(".category") // Select all categories
                     .selectChildren() // Select all children
                     .filter((d,i) => i !== catName) // Select children that DON'T match the class name
                     .style("opacity", 0.2); // Lower opacity
 
-                d3.selectAll(`.${catName}`).style("opacity", 1); // Highlights selected category
+                d3.selectAll(`.${keyName}`).style("opacity", 1); // Highlights selected category
+
+                tooltip // Show tooltip
+                    .style("opacity", 0.9)
+                    .html(`<strong>${name}</strong><br/>Category: ${catName}<br/>$${formatValue(value)}`)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mousemove", function(event) {
+                tooltip
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
             })
             .on("mouseleave", function (event, d) {
                 d3.selectAll(".category").selectChildren().style("opacity", 1); // Return all to opacity 100%
+                tooltip.style("opacity", 0); // Hide tooltip
             });
 
         // Create the axes.
