@@ -3,10 +3,15 @@ import LineChart from './charts/line';
 import MultiLineChart from './charts/multiLine';
 import PieChart from './charts/pie';
 import StackedBarChart from './charts/stackedBar';
+import DivergingStackedBarChart from './charts/divergingStackedBar';
 
 function App() {
   return (
     <div className="App">
+      <DivergingStackedBarChart
+        filepath={"/data/Restaurant unit economics.csv"}
+        title={"Restaurant unit economics"}
+      />
       <StackedBarChart
         filepath={'/data/Online food delivery market revenue, 2017 - 2029.csv'}
         title={"Online Food Delivery Market Revenue"}
