@@ -4,10 +4,32 @@ import MultiLineChart from './charts/multiLine';
 import PieChart from './charts/pie';
 import StackedBarChart from './charts/stackedBar';
 import DivergingStackedBarChart from './charts/divergingStackedBar';
+import SmallMultiplesChart from './charts/smallMultiLine';
 
 function App() {
   return (
     <div className="App">
+      <SmallMultiplesChart
+        csvFiles={[
+          {
+            filepath: "/data/Eggs/Egg Ratio.csv",
+            category: "Eggs",
+          },
+          {
+            filepath: "/data/Bread/Bread Ratio.csv",
+            category: "Bread",
+          },
+          {
+            filepath: "/data/Milk/Milk Ratio.csv",
+            category: "Milk",
+          },
+          {
+            filepath: "/data/Potato Chips/Potato Chip Ratio.csv",
+            category: "Potato Chips",
+          },
+        ]}
+        title={"Small Multiple Lines"}
+      />
       <DivergingStackedBarChart
         filepath={"/data/Restaurant unit economics.csv"}
         title={"Restaurant unit economics"}
