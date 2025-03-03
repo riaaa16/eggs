@@ -5,10 +5,12 @@ import PieChart from './charts/pie';
 import StackedBarChart from './charts/stackedBar';
 import DivergingStackedBarChart from './charts/divergingStackedBar';
 import SmallMultiplesChart from './charts/smallMultiLine';
+import LineButtons from './lineTransitionButtons';
 
 function App() {
   return (
     <div className="App">
+      <LineButtons/>
       <SmallMultiplesChart
         csvFiles={[
           {
@@ -71,28 +73,6 @@ function App() {
           ]}
           title={"Average Prices of Grocery Items"}
           subtitle={"For Northeast America"}
-        />
-        <MultiLineChart
-          csvFiles={[
-            {
-              filepath: "/data/Eggs/Egg Ratio.csv",
-              category: "eggs",
-            },
-            {
-              filepath: "/data/Bread/Bread Ratio.csv",
-              category: "bread",
-            },
-            {
-              filepath: "/data/Milk/Milk Ratio.csv",
-              category: "milk",
-            },
-            {
-              filepath: "/data/Potato Chips/Potato Chip Ratio.csv",
-              category: "potato chips",
-            },
-          ]}
-          title={"Amount of groceries you can afford with one hour of work"}
-          subtitle={"Based off of average prices and minimum wage"}
         />
     </div>
   );
