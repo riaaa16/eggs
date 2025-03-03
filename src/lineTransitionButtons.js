@@ -46,6 +46,7 @@ const LineButtons = () => {
             <div style={{ height: BUTTONS_HEIGHT }}>
                 {buttons.map(( { label, path, subtitle }) => ( // For each obj in buttons array, create a button
                 <button
+                    key = {label}
                     style = {active === label ? activeButton : inactiveButton} // Give active styling if label matches active
                     onClick = {() => {
                         setFilepath(path);
