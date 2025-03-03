@@ -5,7 +5,7 @@ D3 Stacked Bar Chart Source Code: https://observablehq.com/@d3/stacked-bar-chart
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
-const StackedBarChart = ({filepath, title, subtitle}) => {
+const StackedBarChart = ({filepath, title, subtitle, unit = ""}) => {
     const svgRef = useRef(); // Reference to the SVG element
     const [data, setData] = useState(null); // Store loaded CSV data
 
@@ -157,7 +157,7 @@ const StackedBarChart = ({filepath, title, subtitle}) => {
 
                 tooltip // Show tooltip
                     .style("opacity", 0.9)
-                    .html(`<strong>${catName}</strong><br/>$${f(value)} bn`)
+                    .html(`<strong>${catName}</strong><br/>$${f(value)}${unit}`)
                     .style("left", (event.pageX + 10) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
