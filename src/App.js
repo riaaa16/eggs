@@ -39,6 +39,11 @@ function App() {
       <StackedBarChart
         filepath={'/data/Online food delivery market revenue, 2017 - 2029.csv'}
         title={"Online Food Delivery Market Revenue"}
+        unit={" bn"}
+      />
+      <StackedBarChart
+        filepath={'/data/Allocation of money spent on food.csv'}
+        title={"Food Spending Distribution"}
       />
       <LineChart
         filepath={'/data/NJ Hourly Minimum Wage.csv'}
