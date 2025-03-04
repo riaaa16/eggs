@@ -6,10 +6,15 @@ import StackedBarChart from './charts/stackedBar';
 import DivergingStackedBarChart from './charts/divergingStackedBar';
 import SmallMultiplesChart from './charts/smallMultiLine';
 import LineButtons from './lineTransitionButtons';
+import BarChart from './charts/bar';
 
 function App() {
   return (
     <div className="App">
+      <BarChart
+        filepath={"/data/Spending Distribution/2020.csv"}
+        title={"Spending Distribution"}
+      />
       <LineButtons/>
       <SmallMultiplesChart
         csvFiles={[
