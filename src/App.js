@@ -5,17 +5,38 @@ import PieChart from './charts/pie';
 import StackedBarChart from './charts/stackedBar';
 import DivergingStackedBarChart from './charts/divergingStackedBar';
 import SmallMultiplesChart from './charts/smallMultiLine';
-import LineButtons from './lineTransitionButtons';
+import TransitionButtons from './transitionButtons';
 import BarChart from './charts/bar';
 
 function App() {
+  const productRatio = [ // To create buttons for Product Ratio
+    { label: "Eggs", path: "/data/Eggs/Egg Ratio.csv", subtitle: "Grade A Large eggs, per egg."},
+    { label: "Bread", path: "/data/Bread/Bread Ratio.csv", subtitle: "White pan bread, per lb."},
+    { label: "Milk", path: "/data/Milk/Milk Ratio.csv", subtitle: "Fresh whole milk, per gal."},
+    { label: "Potato Chips", path: "/data/Potato Chips/Potato Chip Ratio.csv", subtitle: "Potato chips, per 16 oz."},
+  ];
+
+  const spendDistribution = [ // To create buttons for Spending Distribution
+    { label: "2020", path: "/data/Spending Distribution/2020.csv", subtitle: "How the avg. American consumer spent their money in 2020."},
+    { label: "2021", path: "/data/Spending Distribution/2021.csv", subtitle: "How the avg. American consumer spent their money in 2021."},
+    { label: "2022", path: "/data/Spending Distribution/2022.csv", subtitle: "How the avg. American consumer spent their money in 2022."},
+    { label: "2023", path: "/data/Spending Distribution/2023.csv", subtitle: "How the avg. American consumer spent their money in 2023."},
+  ];
+
   return (
     <div className="App">
-      <BarChart
-        filepath={"/data/Spending Distribution/2020.csv"}
-        title={"Spending Distribution"}
+      <TransitionButtons
+        type = {"bar"}
+        buttons = {spendDistribution}
+        monthly = {false}
+        title = {"Spending Distribution"}
       />
-      <LineButtons/>
+      <TransitionButtons
+        type = {"line"}
+        buttons = {productRatio}
+        monthly = {false}
+        title = {"What an Hour of Work Affords"}
+      />
       <SmallMultiplesChart
         csvFiles={[
           {
