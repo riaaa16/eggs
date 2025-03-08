@@ -4,8 +4,8 @@ import MultiLineChart from './charts/multiLine';
 import PieChart from './charts/pie';
 import StackedBarChart from './charts/stackedBar';
 import DivergingStackedBarChart from './charts/divergingStackedBar';
-import SmallMultiplesChart from './charts/smallMultiLine';
 import TransitionButtons from './transitionButtons';
+import Mindmap from './charts/mindmap';
 
 function App() {
   const groceryPrices = [ // for MultiLineChart
@@ -71,15 +71,19 @@ function App() {
         unit={" bn"}
       />
 
+      {/* Chart below is unnecessary
       <PieChart
           filepath={"/data/Online food delivery market share, 2024.csv"}
           title={"Online Food Delivery Market Share"}
       />
+      */}
 
       <DivergingStackedBarChart
         filepath={"/data/Restaurant unit economics.csv"}
         title={"Restaurant unit economics"}
       />
+
+      <Mindmap/>
     </div>
   );
 }
