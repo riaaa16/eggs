@@ -23,7 +23,7 @@ const DivergingStackedBarChart = ({filepath, title, subtitle}) => {
                 Object.assign(filteredData, { // Adding metadata
                     negative: "← Negative",
                     positive: "Positive →",
-                    negatives: ["Contribution Margin", "Occupancy-"],
+                    negatives: ["Contribution Margin"],
                     positives:[
                         "Customer Paid",
                         "Delivery Fees",
@@ -32,7 +32,7 @@ const DivergingStackedBarChart = ({filepath, title, subtitle}) => {
                         "Driver Tip",
                         "Cost of Goods Sold",
                         "Labor",
-                        "Occupancy+"
+                        "Occupancy"
                     ]
                 });
 
