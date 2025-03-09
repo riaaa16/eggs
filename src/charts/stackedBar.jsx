@@ -94,7 +94,7 @@ const StackedBarChart = ({filepath, title, subtitle, unit = ""}) => {
                       .attr("y", 10)
                       .attr("fill", "currentColor")
                       .attr("text-anchor", "start")
-                      .text("↑ Revenue ($)")
+                      .text("↑ Value ($)")
                   );
 
         // Color palette
