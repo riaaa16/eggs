@@ -1,8 +1,14 @@
 # eggs
+
+## Generating Directory Tree Structure
+```tree -I 'node_modules|README.md' > directory-structure.txt```
+
 ## Question / Topic
-How has the cost of common grocery items (eggs, bread, milk, potato chips) in America scaled with the minimum wage? As the cost of groceries rise, is the average U.S. consumer able to afford more or less?
+Are groceries getting less affordable for the American consumer? Why is food so expensive nowadays?				
 
 ## Data Sources
+My spreadsheet containing my sources and original .csv files can be found [here](https://docs.google.com/spreadsheets/d/12Qcm4pZ3EbAPCV3ndg5vRBFeu_duk7GwUoJ_WrWvjAo/edit?usp=sharing).
+
 - **Hourly Minimum Wage Rates in NJ**
   - Source: Federal Reserve Bank of St. Louis
     - Data is stated to be sourced from the U.S. Department of Labor
