@@ -55,7 +55,7 @@ const TransitionButtons = ({ type, buttons, monthly, title}) => {
                 {buttons.map(( { label, path, subtitle }) => ( // For each obj in buttons array, create a button
                 <button
                     key = {label}
-                    style = {active === label ? activeButton : inactiveButton} // Give active styling if label matches active
+                    className = {active === label ? 'active-chart-btn' : 'inactive-chart-btn'} // Give active styling if label matches active
                     onClick = {() => {
                         setFilepath(path);
                         setSubtitle(subtitle);

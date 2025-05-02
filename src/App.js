@@ -55,7 +55,7 @@ function App() {
         </ul>
         <p>The data shows a definite rise in the price of goods. It is an undeniable fact
           that groceries are becoming more expensive — but is this something we should
-          actually be worring about?</p>
+          actually be worrying about?</p>
       </div>
 
       <div className="section-box">
@@ -63,8 +63,8 @@ function App() {
           filepath={'/data/NJ Hourly Minimum Wage.csv'}
           title={"NJ Hourly Minimum Wage."}
         />
-        <p>If we take a close look at minimum wage — specifically in the NJ — the amount
-          we are able to earn as works has been increasing over the years. However, an increase in bought
+        <p>If we take a close look at minimum wage — specifically in NJ — the amount
+          we are able to earn as workers has been increasing over the years. However, an increase in both
           minimum wage and food products doesn't mean anything if the prices of foods are
           increasing at a quicker rate.</p>
       </div>
@@ -120,14 +120,13 @@ function App() {
             <ul>
             <li>Restaurants (fast food & full service)</li>
             <li>Food trucks</li>
-            <li>Food trucks</li>
             <li>Employer/school cafeterias</li>
             <li>Vending machines</li>
             </ul>
         </ul>
         <p>There is a noticeable shift during 2020 — the beginning of the COVID-19 pandemic.
           We've spent more of our earnings buying groceries and eating at home. However, after 2020,
-          we began returning to spending money on food away at home.
+          we began returning to spending money on food away from home.
         </p>
       </div>
 
@@ -160,9 +159,9 @@ function App() {
         />
         <p>This chart from McKinsey & Company shows what a typical restaurant earns when
           you order through a food delivery service. Let's break it down.</p>
-        <p>Original pyment is how much the customer initially paid for their order. Note the bar in red — Contributor Margins.</p>
+        <p>Original payment is how much the customer initially paid for their order. Note the bar in red — Contribution Margins.</p>
         <p>In delivery fees, we split the costs into what a restaurant must pay the delivery service. The gross margin
-          is what is left over after fees are deducted. After that, the gross-margin is used to pay a restaurant's operating costs.
+          is what is left over after fees are deducted. After that, the gross margin is used to pay a restaurant's operating costs.
         </p>
         <p>The restaurant must use the gross margin to pay for:</p>
         <ul>
