@@ -184,20 +184,20 @@ const DivergingStackedBarChart = ({filepath, title, subtitle}) => {
 
     return (
         <div>
-            <h1>{title}</h1>
-            <p>{subtitle}</p>
-          {data ? (
-            <svg
-              ref={svgRef}
-              width={928}
-              height={200}
-              style={{ border: "1px solid #ccc", background: "#fafafa" }}
-            />
-          ) : (
-            <p>Loading data...</p>
-          )}
+            <h2 className="chart-title">{title}</h2>
+            {subtitle && <div className="chart-subtitle">{subtitle}</div>}
+            {data ? (
+                <svg
+                    ref={svgRef}
+                    width={928}
+                    height={200}
+                    style={{ border: "1px solid #ccc", background: "#fafafa" }}
+                />
+            ) : (
+                <p>Loading data...</p>
+            )}
         </div>
-      );
+    );
 
 };
 

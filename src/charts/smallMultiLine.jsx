@@ -122,8 +122,8 @@ const SmallMultiplesChart = ({ csvFiles, title, subtitle }) => {
 
   return (
     <div>
-      <h1>{title}</h1>
-      <p>{subtitle}</p>
+      <h2 className="chart-title">{title}</h2>
+      {subtitle && <div className="chart-subtitle">{subtitle}</div>}
       {data ? <div ref={svgRef}></div> : <p>Loading data...</p>}
     </div>
   );

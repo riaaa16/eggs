@@ -1,32 +1,28 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Markmap } from "markmap-view";
 import { Transformer } from "markmap-lib";
+import { Toolbar } from "markmap-toolbar";
+import "markmap-toolbar/dist/style.css";
 
-const Mindmap = () => {
-  const svgRef = useRef(null); // Set SVG reference
-  const initialized = useRef(false); // Set initialization
-  const transformer = new Transformer(); // To transform markdown to map
+const transformer = new Transformer();
 
-  useEffect(() => {
-    // Only initialize once
-    if (!svgRef.current || initialized.current) return;
-    
-    initialized.current = true;
-    
-    // Clear SVG first to prevent duplicates
-    while (svgRef.current.firstChild) {
-      svgRef.current.removeChild(svgRef.current.firstChild);
-    }
+function renderToolbar(mm, wrapper) {
+  while (wrapper?.firstChild) wrapper.firstChild.remove();
+  if (mm && wrapper) {
+    const toolbar = new Toolbar();
+    toolbar.attach(mm);
+    toolbar.setItems([...Toolbar.defaultItems]);
+    wrapper.append(toolbar.render());
+  }
+}
 
-    const mm = Markmap.create(svgRef.current, { // Create markmap
-      maxWidth: 928,
-      colorFreezeLevel: 2, // How many different colors you want per node
-      spacingHorizontal: 100,
-      spacingVertical: 20,
-      autofit: true
-    });
+export default function Mindmap() {
+  const refSvg = useRef();
+  const refMm = useRef();
+  const refToolbar = useRef();
 
-    const markdown = `
+  // Static mindmap content
+  const value = `
 # **Why is food so expensive today?**
 ## Groceries
 ### Price of goods have been increasing
@@ -42,15 +38,29 @@ const Mindmap = () => {
 #### Continued reliance on food-delivery post-pandemic
 `;
 
-    const { root } = transformer.transform(markdown); // Transform markdown
-    mm.setData(root); // Set data
-    mm.fit();
-    mm.rescale(0.6); // Set initial zoom
-
+  useEffect(() => {
+    if (refMm.current) return;
+    const mm = Markmap.create(refSvg.current, { maxWidth: 928, autofit: true });
+    refMm.current = mm;
+    renderToolbar(mm, refToolbar.current);
+    const { root } = transformer.transform(value);
+    mm.setData(root).then(() => {
+      mm.fit();
+    });
   }, []);
 
-  // Return markmap
-  return <svg ref={svgRef} style={{ width: "100%", height: "400px" }} />;
-};
-
-export default Mindmap;
+  return (
+    <div style={{ position: "relative", width: "100%" }}>
+      <svg
+        ref={refSvg}
+        style={{ width: "100%", height: 400, background: "#fff" }}
+        viewBox="0 0 928 400"
+        preserveAspectRatio="xMidYMid meet"
+      />
+      <div
+        style={{ position: "absolute", bottom: 8, right: 8, zIndex: 2 }}
+        ref={refToolbar}
+      />
+    </div>
+  );
+}
